@@ -12,7 +12,7 @@ Global Temperature Time Series. Global monthly mean and annual mean temperature 
   Citation: *NOAA National Climatic Data Center (NCDC), Global component of Climate at a Glance (GCAG).*
 
 *Additional Data*
-The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not included in the published Data Package at this time because of it's restrictive [terms and conditions][hadcrut4-terms]. However, the dataset is supported by the scraper.
+The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not included in the published Data Package at this time because of it's restrictive [terms and conditions][hadcrut4-terms]. However, processing the dataset is supported by the script.
 
 [gistemp]: http://data.giss.nasa.gov/gistemp/
 [gcag]: http://www.ncdc.noaa.gov/cag/data-info/global
@@ -24,7 +24,9 @@ The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not 
 
 ## Preparation
 
-The data are prepared with a Python script. In the GISTEMP dataset, hundredths of degrees Celsius are transformed to degrees Celsius.
+The data are prepared with a Python script. The HadCRUT4 processing script, which is not run by default, requires the external `lxml` module.
+
+In the GISTEMP dataset, hundredths of degrees Celsius are transformed to degrees Celsius.
 
 Run the following script to download the data and write them to annual and monthly CSV files:
 

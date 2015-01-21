@@ -12,7 +12,10 @@ from operator import itemgetter
 from collections import OrderedDict
 from json import dumps
 
-from lxml import etree
+try:
+    from lxml import etree
+except ImportError:
+    etree = None
 
 logger = logging.getLogger()
 
@@ -185,6 +188,11 @@ class HadCRUT4():
                 yield [timescale, [self.id, date, mean]]
 
     def _get_resources(self):
+        """Raise ValueError if lxml is not loaded"""
+        if not etree:
+            message = "lxml must be installed to use the HadCRUT4 processor"
+            raise ValueError(message)
+
         data = self._get_data(self.home_url)
         html = etree.HTML(data)
         yield self._get_annual_resource(html)
