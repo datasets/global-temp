@@ -34,7 +34,7 @@
           {
             "name": "Mean", 
             "type": "number", 
-            "description": "Average mean temperature anomalies in degrees Celsius relative to a base period.\\nGISTEMP base period: 1951-1980\\nGCAG base period: 20th century average"
+            "description": "Average mean temperature anomalies in degrees Celsius relative to a base period. GISTEMP base period: 1951-1980. GCAG base period: 20th century average."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "name": "Mean", 
             "type": "number", 
-            "description": "Monthly mean temperature anomalies in degrees Celsius relative to a base period.\\nGISTEMP base period: 1951-1980\\nGCAG base period: 20th century average"
+            "description": "Monthly mean temperature anomalies in degrees Celsius relative to a base period. GISTEMP base period: 1951-1980. GCAG base period: 20th century average."
           }
         ]
       }
