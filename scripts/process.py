@@ -250,9 +250,9 @@ class DataProcessor():
         self.annual_fields[2].update([('name', 'Mean')])
         self.annual_fields[2].update([('type', 'number')])
         self.annual_fields[2].update([('description',
-        u'Average mean temperature anomalies in °C relative to a base period.\n'
-        'GISTEMP base period: 1951-1980\n'
-        'GCAG base period: 20th century average\n'
+        u'Average mean temperature anomalies in degrees Celsius relative to a base period.\\n'
+        'GISTEMP base period: 1951-1980\\n'
+        'GCAG base period: 20th century average'
         # 'HadCRUT4: 1961-1990'
         )])
 
@@ -275,8 +275,8 @@ class DataProcessor():
         self.monthly_fields[2].update([('name', 'Mean')])
         self.monthly_fields[2].update([('type', 'number')])
         self.monthly_fields[2].update([('description',
-        u'Monthly mean temperature anomalies in °C relative to a base period.\n'
-        'GISTEMP base period: 1951-1980\n'
+        u'Monthly mean temperature anomalies in degrees Celsius relative to a base period.\\n'
+        'GISTEMP base period: 1951-1980\\n'
         'GCAG base period: 20th century average'
         # 'HadCRUT4: 1961-1990'
         )])
