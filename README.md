@@ -26,7 +26,7 @@ The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not 
 
 The data are prepared with a Python script. The HadCRUT4 processing script, which is not run by default, requires the external `lxml` module.
 
-In the GISTEMP dataset, hundredths of degrees Celsius are transformed to degrees Celsius.
+In the GISTEMP dataset, hundredths of degrees Celsius are converted to degrees Celsius.
 
 Run the following script to download the data and write them to annual and monthly CSV files:
 
