@@ -2,24 +2,20 @@ Global Temperature Time Series. Global monthly mean and annual mean temperature 
 
 ## Data
 1. GISS Surface Temperature Analysis (GISTEMP):
-
-  Base period: 1951-1980
-
-  Sources: [GHCN-M][ghcn-m], [ERSST][ersst]
-
-  Citation: *GISTEMP: NASA Goddard Institute for Space Studies (GISS) Surface Temperature Analysis.*
+  * Base period: 1951-1980
+  * Sources: [GHCN-M][ghcn-m], [ERSST][ersst]
+  * Citation: *GISTEMP: NASA Goddard Institute for Space Studies (GISS) Surface Temperature Analysis.*
 
 1. Global component of Climate at a Glance (GCAG):
+  * Base period: 20th century
+  * Sources: [GHCN-M][ghcn-m], [ICOADS][icoads]
+  * Citation: *NOAA National Climatic Data Center (NCDC), Global component of Climate at a Glance (GCAG).*
 
-  Base period: 20th century
+**Additional Data**
 
-  Sources: [GHCN-M][ghcn-m], [ICOADS][icoads]
+* [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4]
 
-  Citation: *NOAA National Climatic Data Center (NCDC), Global component of Climate at a Glance (GCAG).*
-
-*Additional Data*
-
-The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not included in the published Data Package at this time because of it's restrictive [terms and conditions][hadcrut4-terms]. However, processing the dataset is supported by the script.
+  *The HadCRUT data are not included in the published Data Package at this time because of the dataset's restrictive [terms and conditions][hadcrut4-terms]. However, the data preparation script supports processing the dataset.*
 
 [gistemp]: http://data.giss.nasa.gov/gistemp/
 [gcag]: http://www.ncdc.noaa.gov/cag/data-info/global
@@ -31,11 +27,7 @@ The [HadCRUT4 time series: ensemble medians and uncertainties][hadcrut4] is not 
 
 ## Preparation
 
-The data are prepared with a Python script.
-
-The HadCRUT4 processing script, which is not run by default, requires the external `lxml` module.
-
-In the GISTEMP dataset, hundredths of degrees Celsius are converted to degrees Celsius.
+The data are prepared with a Python script. In the GISTEMP dataset, hundredths of degrees Celsius are converted to degrees Celsius. The HadCRUT4 processing script, which is not run by default, requires the external `lxml` module.
 
 Run the following script to download the data and write them to annual and monthly CSV files:
 
