@@ -20,15 +20,14 @@ except ImportError:
 logger = logging.getLogger()
 
 class SimpleFileCache():
-    TAG_DELIMITER = '--'
-
-    def __init__(self, directory):
-        self.directory = directory
-        if not path.exists(directory):
-            makedirs(directory)
+    def __init__(self, **kwargs):
+        self.directory = kwargs.get('directory', 'tmp')
+        self.tag_delimiter = kwargs.get('tag_delimiter', '--')
+        if not path.exists(self.directory):
+            makedirs(self.directory)
 
     def add(self, tags, ext, data):
-        basename = self.TAG_DELIMITER.join(tags)
+        basename = self.tag_delimiter.join(tags)
         file_name = '.'.join([basename, ext])
         destination = path.join(self.directory, file_name)
         with open(destination, 'w') as file:
@@ -36,7 +35,7 @@ class SimpleFileCache():
 
     def findall(self):
         for file_name in listdir(self.directory):
-            tags = path.splitext(file_name)[0].split(self.TAG_DELIMITER)
+            tags = path.splitext(file_name)[0].split(self.tag_delimiter)
             source = path.join(self.directory, file_name)
             with open(source, 'r') as data:
                 yield data, tags
@@ -297,7 +296,7 @@ class DataProcessor():
 
     def setup(self):
         logger.info('Setting up processor')
-        self.cache = SimpleFileCache('tmp')
+        self.cache = SimpleFileCache()
         if not path.exists('data'):
             makedirs('data')
 
