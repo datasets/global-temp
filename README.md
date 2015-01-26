@@ -31,7 +31,9 @@ The data are prepared with a Python script. In the GISTEMP dataset, hundredths o
 
 Run the following script to download the data and write them to annual and monthly CSV files:
 
-`python scripts/process.py`
+```
+python scripts/process.py
+````
 
 The raw data are output to `./tmp`. The processed data are output to `./data`.
 
