@@ -1,64 +1,62 @@
 {
-  "name": "global-temp-time-series", 
-  "title": "Global Temperature Anomalies Time Series", 
-  "version": "0.1.0", 
-  "license": "PDDL-1.0", 
+  "name": "global-temp",
+  "title": "Global Temperature Time Series",
+  "version": "0.1.0",
+  "license": "ODC-PDDL-1.0",
   "sources": [
     {
-      "name": "GISS Surface Temperature Analysis (GISTEMP)", 
+      "name": "GISTEMP Global Land-Ocean Temperature Index",
       "web": "http://data.giss.nasa.gov/gistemp"
-    }, 
+    },
     {
-      "name": "Global component of Climate at a Glance (GCAG)", 
+      "name": "Global component of Climate at a Glance (GCAG)",
       "web": "http://www.ncdc.noaa.gov/cag/time-series/global"
     }
-  ], 
+  ],
   "resources": [
     {
-      "name": "annual", 
-      "path": "data/annual.csv", 
-      "format": "csv", 
-      "mediatype": "text/csv", 
+      "name": "annual",
+      "path": "data/annual.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
       "schema": {
         "fields": [
           {
-            "name": "Source", 
-            "type": "string", 
-            "description": ""
-          }, 
+            "name": "Source",
+            "type": "string"
+          },
           {
-            "name": "Year", 
-            "type": "date", 
+            "name": "Year",
+            "type": "date",
             "description": "YYYY"
-          }, 
+          },
           {
-            "name": "Mean", 
-            "type": "number", 
-            "description": "Average mean temperature anomalies in degrees Celsius relative to a base period. GISTEMP base period: 1951-1980. GCAG base period: 20th century average."
+            "name": "Mean",
+            "type": "number",
+            "description": "Average global mean temperature anomalies in degrees Celsius relative to a base period. GISTEMP base period: 1951-1980. GCAG base period: 20th century average."
           }
         ]
       }
-    }, 
+    },
     {
-      "name": "monthly", 
-      "path": "data/monthly.csv", 
-      "format": "csv", 
-      "mediatype": "text/csv", 
+      "name": "monthly",
+      "path": "data/monthly.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
       "schema": {
         "fields": [
           {
-            "name": "Source", 
-            "type": "string", 
-            "description": ""
-          }, 
+            "name": "Source",
+            "type": "string"
+          },
           {
-            "name": "Date", 
-            "type": "date", 
+            "name": "Date",
+            "type": "date",
             "description": "YYYY-MM"
-          }, 
+          },
           {
-            "name": "Mean", 
-            "type": "number", 
+            "name": "Mean",
+            "type": "number",
             "description": "Monthly mean temperature anomalies in degrees Celsius relative to a base period. GISTEMP base period: 1951-1980. GCAG base period: 20th century average."
           }
         ]

@@ -12,11 +12,6 @@ from operator import itemgetter
 from collections import OrderedDict
 from json import dumps
 
-try:
-    from lxml import etree
-except ImportError:
-    etree = None
-
 logger = logging.getLogger()
 
 class SimpleFileCache():
@@ -43,7 +38,7 @@ class SimpleFileCache():
 class GISTEMP():
     def __init__(self):
         self.id = 'GISTEMP'
-        self.name = 'GISS Surface Temperature Analysis (GISTEMP)'
+        self.name = 'GISTEMP Global Land-Ocean Temperature Index'
         self.base_url = 'http://data.giss.nasa.gov/gistemp'
         self.source = OrderedDict([('name', self.name), ('web', self.base_url)])
 
@@ -167,13 +162,11 @@ class HadCRUT4():
         self.id = 'HadCRUT4'
         self.name = 'Joint Met Office Hadley Centre and University of East Anglia HadCRUT global temperature dataset'
         self.home_url = 'http://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/download.html'
-        self.base_url = 'http://www.metoffice.gov.uk/hadobs/hadcrut4/data/current'
         self.source = OrderedDict([('name', self.name), ('web', self.home_url)])
 
     def retrieve(self):
-        for timescale, resource in self._get_resources():
-            representation = resource.split('.')[-1]
-            url = '/'.join([self.base_url, resource])
+        for timescale, url in self._get_resources():
+            representation = url.split('.')[-1]
             data = self._get_data(url)
             tags = [self.id.lower(), timescale]
             yield [data, tags, representation]
@@ -187,23 +180,16 @@ class HadCRUT4():
                 yield [timescale, [self.id, date, mean]]
 
     def _get_resources(self):
-        """Raise ValueError if lxml is not loaded"""
-        if not etree:
-            message = "lxml must be installed to use the HadCRUT4 processor"
-            raise ValueError(message)
+        yield self._get_annual_resource()
+        yield self._get_monthly_resource()
 
-        data = self._get_data(self.home_url)
-        html = etree.HTML(data)
-        yield self._get_annual_resource(html)
-        yield self._get_monthly_resource(html)
+    def _get_annual_resource(self):
+        url = 'http://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/time_series/HadCRUT.4.3.0.0.annual_ns_avg.txt'
+        return ['annual', url]
 
-    def _get_annual_resource(self, html):
-        result = html.xpath('//a[contains(@href, "annual_ns_avg.txt")]/@href')
-        return ['annual', result[0]]
-
-    def _get_monthly_resource(self, html):
-        result = html.xpath('//a[contains(@href, "monthly_ns_avg.txt")]/@href')
-        return ['monthly', result[0]]
+    def _get_monthly_resource(self):
+        url = 'http://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/time_series/HadCRUT.4.3.0.0.monthly_ns_avg.txt'
+        return ['monthly', url]
 
     def _get_data(self, url):
         req = Request(url)
@@ -227,68 +213,78 @@ class DataPackage():
 
     def write(self):
         with open('datapackage.json', 'w') as file:
-            file.write(dumps(self.fields, indent=2))
+            # set separators to prevent trailing whitespace
+            # https://hg.python.org/cpython/rev/78bad589f205
+            # via http://bugs.python.org/issue16333
+            json = dumps(self.fields, indent=2, separators=(',', ': '))
+            print(json, file=file)
 
 class DataProcessor():
     def __init__(self, sources):
-        self.fields = OrderedDict()
-        self.fields.update([('name', 'global-temp-time-series')])
-        self.fields.update([('title', 'Global Temperature Anomalies Time Series')])
-        self.fields.update([('version', '0.1.0')])
-        self.fields.update([('license', 'PDDL-1.0')])
-
+        self.fields = OrderedDict([
+            ('name', 'global-temp'),
+            ('title', 'Global Temperature Time Series'),
+            ('version', '0.1.0'),
+            ('license', 'ODC-PDDL-1.0')
+        ])
         self.sources = [source() for source in self._is_source(sources)]
 
         self.annual_fields = [OrderedDict(), OrderedDict(), OrderedDict()]
-        self.annual_fields[0].update([('name', 'Source')])
-        self.annual_fields[0].update([('type', 'string')])
-        self.annual_fields[0].update([('description', '')])
-        self.annual_fields[1].update([('name', 'Year')])
-        self.annual_fields[1].update([('type', 'date')])
-        self.annual_fields[1].update([('description', 'YYYY')])
-        self.annual_fields[2].update([('name', 'Mean')])
-        self.annual_fields[2].update([('type', 'number')])
-        self.annual_fields[2].update([('description',
-        u'Average mean temperature anomalies in degrees Celsius relative to a base period. '
-        'GISTEMP base period: 1951-1980. '
-        'GCAG base period: 20th century average.'
-        # 'HadCRUT4: 1961-1990'
-        )])
-
+        self.annual_fields[0].update([
+            ('name', 'Source'),
+            ('type', 'string')
+        ])
+        self.annual_fields[1].update([
+            ('name', 'Year'),
+            ('type', 'date'),
+            ('description', 'YYYY')
+        ])
+        self.annual_fields[2].update([
+            ('name', 'Mean'),
+            ('type', 'number'),
+            ('description', u'Average global mean temperature anomalies'
+                ' in degrees Celsius relative to a base period.'
+                ' GISTEMP base period: 1951-1980.'
+                ' GCAG base period: 20th century average.'
+              # ' HadCRUT4 base period: 1961-1990.'
+            )
+        ])
         self.annual_schema = OrderedDict([('fields', self.annual_fields)])
-
-        self.annual_resource = OrderedDict([])
-        self.annual_resource.update([('name', 'annual')])
-        self.annual_resource.update([('path', 'data/annual.csv')])
-        self.annual_resource.update([('format', 'csv')])
-        self.annual_resource.update([('mediatype', 'text/csv')])
+        self.annual_resource = OrderedDict([
+            ('name', 'annual'),
+            ('path', 'data/annual.csv'),
+            ('format', 'csv'),
+            ('mediatype', 'text/csv')
+        ])
         self.annual_resource.update([('schema', self.annual_schema)])
-
         self.monthly_fields = [OrderedDict(), OrderedDict(), OrderedDict()]
-        self.monthly_fields[0].update([('name', 'Source')])
-        self.monthly_fields[0].update([('type', 'string')])
-        self.monthly_fields[0].update([('description', '')])
-        self.monthly_fields[1].update([('name', 'Date')])
-        self.monthly_fields[1].update([('type', 'date')])
-        self.monthly_fields[1].update([('description', 'YYYY-MM')])
-        self.monthly_fields[2].update([('name', 'Mean')])
-        self.monthly_fields[2].update([('type', 'number')])
-        self.monthly_fields[2].update([('description',
-        u'Monthly mean temperature anomalies in degrees Celsius relative to a base period. '
-        'GISTEMP base period: 1951-1980. '
-        'GCAG base period: 20th century average.'
-        # 'HadCRUT4: 1961-1990'
-        )])
-
+        self.monthly_fields[0].update([
+            ('name', 'Source'),
+            ('type', 'string')
+        ])
+        self.monthly_fields[1].update([
+            ('name', 'Date'),
+            ('type', 'date'),
+            ('description', 'YYYY-MM')
+        ])
+        self.monthly_fields[2].update([
+            ('name', 'Mean'),
+            ('type', 'number'),
+            ('description', u'Monthly mean temperature anomalies'
+                ' in degrees Celsius relative to a base period.'
+                ' GISTEMP base period: 1951-1980.'
+                ' GCAG base period: 20th century average.'
+              # ' HadCRUT4 base period: 1961-1990.'
+            )
+        ])
         self.monthly_schema = OrderedDict([('fields', self.monthly_fields)])
-
-        self.monthly_resource = OrderedDict([])
-        self.monthly_resource.update([('name', 'monthly')])
-        self.monthly_resource.update([('path', 'data/monthly.csv')])
-        self.monthly_resource.update([('format', 'csv')])
-        self.monthly_resource.update([('mediatype', 'text/csv')])
+        self.monthly_resource = OrderedDict([
+            ('name', 'monthly'),
+            ('path', 'data/monthly.csv'),
+            ('format', 'csv'),
+            ('mediatype', 'text/csv')
+        ])
         self.monthly_resource.update([('schema', self.monthly_schema)])
-
         self.resources = [self.annual_resource, self.monthly_resource]
 
         if not path.exists('data'):
