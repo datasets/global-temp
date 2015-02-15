@@ -206,10 +206,11 @@ class HadCRUT4():
         return row and match(r'\d{4}', row[0])
 
 class DataPackage():
-    def __init__(self, fields, sources, resources):
+    def __init__(self, fields, sources, resources, views):
         self.fields = fields
         self.fields.update([('sources', [source.source for source in sources])])
         self.fields.update([('resources', [resource for resource in resources])])
+        self.fields.update([('views', [view for view in views])])
 
     def write(self):
         with open('datapackage.json', 'w') as file:
@@ -286,6 +287,17 @@ class DataProcessor():
         ])
         self.monthly_resource.update([('schema', self.monthly_schema)])
         self.resources = [self.annual_resource, self.monthly_resource]
+        self.views = [OrderedDict()]
+        self.views[0].update([
+            ('id', 'graph'),
+            ('label', 'Graph'),
+            ('type', 'Graph'),
+            ('state', OrderedDict([
+                ('group', 'Year'),
+                ('series', ['Mean']),
+                ('graphType', 'columns')
+            ]))
+        ])
 
         if not path.exists('data'):
             makedirs('data')
@@ -337,7 +349,9 @@ class DataProcessor():
 
     def package(self):
         logger.info('Building data package')
-        data_package = DataPackage(self.fields, self.sources, self.resources)
+        data_package = DataPackage(
+            self.fields, self.sources, self.resources, self.views
+        )
         data_package.write()
 
     def _is_source(self, sources):

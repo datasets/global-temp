@@ -62,5 +62,19 @@
         ]
       }
     }
+  ],
+  "views": [
+    {
+      "id": "graph",
+      "label": "Graph",
+      "type": "Graph",
+      "state": {
+        "group": "Year",
+        "series": [
+          "Mean"
+        ],
+        "graphType": "columns"
+      }
+    }
   ]
 }
