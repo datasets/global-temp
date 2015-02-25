@@ -67,7 +67,7 @@ class GISTEMP():
 
     def _extract_annual_row(self, data, row):
         year = row[0]
-        mean = self._hundredths_degrees_to_degrees(row[13])
+        mean = self._hundredths_degrees_to_degrees(row[13]) or 'NA'
         annual_row = [self.id, year, mean]
         return ['annual', annual_row]
 
@@ -75,7 +75,7 @@ class GISTEMP():
         year = row[0]
         month = str(column).zfill(2)
         date = '-'.join([year, month])
-        mean = self._hundredths_degrees_to_degrees(row[column])
+        mean = self._hundredths_degrees_to_degrees(row[column]) or 'NA'
         monthly_row = [self.id, date, mean]
         return ['monthly', monthly_row]
 
@@ -83,7 +83,10 @@ class GISTEMP():
         return row and match(r'\d{4}', row[0])
 
     def _hundredths_degrees_to_degrees(self, hundredths_degrees):
-        return str(int(hundredths_degrees)/100.0)
+        result = None
+        if not match(r'\*', hundredths_degrees[0]):
+            result = str(int(hundredths_degrees)/100.0)
+        return result
 
 class GCAG():
     def __init__(self):
@@ -331,7 +334,8 @@ class DataProcessor():
             for data, tags in self.cache.findall():
                 for source in self.sources:
                     for timescale, row in source.extract(data, tags):
-                        print(','.join(row), file=files[timescale])
+                        if not match(r'NA', row[-1]):
+                            print(','.join(row), file=files[timescale])
 
     def sort(self):
         logger.info('Sorting data')
