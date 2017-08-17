@@ -56,11 +56,13 @@
   "sources": [
     {
       "name": "GISTEMP Global Land-Ocean Temperature Index",
-      "web": "http://data.giss.nasa.gov/gistemp"
+      "web": "http://data.giss.nasa.gov/gistemp",
+      "title": "GISTEMP Global Land-Ocean Temperature Index"
     },
     {
       "name": "Global component of Climate at a Glance (GCAG)",
-      "web": "http://www.ncdc.noaa.gov/cag/time-series/global"
+      "web": "http://www.ncdc.noaa.gov/cag/time-series/global",
+      "title": "Global component of Climate at a Glance (GCAG)"
     }
   ],
   "title": "Global Temperature Time Series",
