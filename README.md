@@ -35,7 +35,7 @@ Global Temperature Time Series. Data are included from the GISS Surface Temperat
 * Other:
   * [HadCRUT4][hadcrut4] time series data are not included in the published Data Package at this time because of the dataset's restrictive [terms and conditions][hadcrut4-terms]. However, the data preparation script supports processing the dataset.
 
-## Data Preparation
+## Preparation
 
 ### Requirements
 
