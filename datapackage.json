@@ -1,5 +1,11 @@
 {
-  "license": "ODC-PDDL-1.0",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
   "name": "global-temp",
   "resources": [
     {
@@ -55,12 +61,12 @@
   "sources": [
     {
       "name": "GISTEMP Global Land-Ocean Temperature Index",
-      "web": "http://data.giss.nasa.gov/gistemp",
+      "path": "http://data.giss.nasa.gov/gistemp",
       "title": "GISTEMP Global Land-Ocean Temperature Index"
     },
     {
       "name": "Global component of Climate at a Glance (GCAG)",
-      "web": "http://www.ncdc.noaa.gov/cag/time-series/global",
+      "path": "http://www.ncdc.noaa.gov/cag/time-series/global",
       "title": "Global component of Climate at a Glance (GCAG)"
     }
   ],
