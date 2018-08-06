@@ -85,5 +85,31 @@
         ]
       }
     }
+  ],
+  "related": [
+    {
+      "title": "Trends in Atmospheric Carbon Dioxide",
+      "path": "/core/co2-ppm",
+      "publisher": "core",
+      "formats": ["CSV", "JSON"]
+    },
+    {
+      "title": "CO2 Emissions from Fossil Fuels",
+      "path": "/core/co2-fossil-by-nation",
+      "publisher": "core",
+      "formats": ["CSV", "JSON"]
+    },
+    {
+      "title": "Sea level rise",
+      "path": "/core/sea-level-rise",
+      "publisher": "core",
+      "formats": ["CSV", "JSON"]
+    },
+    {
+      "title": "Glacier mass balance",
+      "path": "/core/glacier-mass-balance",
+      "publisher": "core",
+      "formats": ["CSV", "JSON"]
+    }
   ]
 }
