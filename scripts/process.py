@@ -44,7 +44,7 @@ def convert_gcag_to_csv(gcagDictMonthly, gcagDictAnnual):
     """
         Converts the gcag data to CSV format
     """
-    source = 'gcag'
+    source = 'GCAG'
     dict_temp_annual = {'Source': [], 'Year': [], 'Mean': []}
     dict_temp_monthly = {'Source': [], 'Year': [], 'Mean': []}
     for elem in gcagDictAnnual:
