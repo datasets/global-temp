@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import csv
 import shutil
@@ -56,7 +55,7 @@ def convert_gcag_to_csv(gcagDictMonthly, gcagDictAnnual):
         dict_temp_monthly['Source'].append(source)
         dict_temp_monthly['Year'].append(elem[0])
         dict_temp_monthly['Mean'].append(round_to_4(elem[1]))
-    
+
     for csv_files, dataset in zip(['annual_gcag.csv', 'monthly_gcag.csv'], [dict_temp_annual, dict_temp_monthly]):
         with open(os.path.join(tmp, csv_files), "w", newline="\n") as f:
             w = csv.DictWriter(f, fieldnames=dataset.keys())
@@ -89,7 +88,7 @@ def convert_gistemp_to_csv(gistempDict):
             dict_temp_monthly['Year'].append(elem[0] + '-' + str(month).zfill(2))
             dict_temp_monthly['Mean'].append(float(value))
             month += 1
-    
+
     for csv_files, dataset in zip(['annual_gistemp.csv', 'monthly_gistemp.csv'], [dict_temp_annual, dict_temp_monthly]):
         with open(os.path.join(tmp, csv_files), "w", newline="\n") as f:
             w = csv.DictWriter(f, fieldnames=dataset.keys())
@@ -118,26 +117,26 @@ def process_csv(url):
 def process_gistemp():
     if not os.path.exists(tmp):
         os.makedirs(tmp)
-    
+
     #Step 1: Fetch and process the GISTEMP data from the URL
     print('Step 1: Fetching and processing GISTEMP data...')
     temp_data = process_csv(GISTEMP_URL)
-        
+
     # Step 2: Extract the first 13 elements of each list and remove unnecessary headers
     print('Step 2: Extracting relevant data...')
     processed_data = [elem[:13] for elem in temp_data if len(elem) > 12][1:]
-        
+
     # Step 3: Convert the processed data to CSV format
     print('Step 3: Converting processed data to CSV format...')
     convert_gistemp_to_csv(processed_data)
-        
+
     print('GISTEMP data processing and conversion complete!')
-    
+
     #Step 4: Fetch and process the HADCRUT data from the URL
     print('Step 4: Fetching and processing HADCRUT data...')
     gcag_monthly = process_csv(GCAG_URL_monthly)
     gcag_annual = process_csv(GCAG_URL_annual)
-        
+
     # Step 5: Extract the first 2 elements of each list and remove unnecessary headers
     print('Step 5: Extracting relevant data...')
     processed_gcag_monthly = [elem[:2] for elem in gcag_monthly if len(elem) > 2][1:]
@@ -146,7 +145,7 @@ def process_gistemp():
     # Step 6: Convert the processed data to CSV format
     print('Step 6: Converting processed data to CSV format...')
     convert_gcag_to_csv(processed_gcag_monthly, processed_gcag_annual)
-        
+
     print('GISTEMP data processing and conversion complete!')
 
     # Step 7: Merge the GISTEMP and HADCRUT data into a single CSV file
@@ -159,6 +158,3 @@ def process_gistemp():
     # Step 8: Remove unnecessary files
     print('Step 8: Removing unnecessary files...')
     shutil.rmtree(tmp)
-        
-if __name__ == '__main__':
-    process_gistemp()
