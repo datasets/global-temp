@@ -82,7 +82,7 @@
         "monthly"
       ],
       "spec": {
-        "type": "column",
+        "type": "bar",
         "group": "Year",
         "series": [
           "Mean"
