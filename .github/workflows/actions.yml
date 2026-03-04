@@ -18,6 +18,9 @@ on:
   # Allows manual triggering of the workflow
   workflow_dispatch: 
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -54,4 +57,4 @@ jobs:
       run: |
         git config --global user.email "${{env.CI_COMMIT_EMAIL}}"
         git config --global user.name "${{env.CI_COMMIT_NAME}}"
-        git diff --quiet && echo "No changes to commit" || (git add data/country-codes.csv && git commit -m "${{env.CI_COMMIT_MESSAGE}}" && git push)
+        git diff --quiet && echo "No changes to commit" || (git add data/*.csv && git commit -m "${{env.CI_COMMIT_MESSAGE}}" && git push)
