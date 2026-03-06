@@ -77,13 +77,10 @@
       "name": "graph",
       "title": "Monthly mean temperature anomalies in degrees Celsius relative to a base period",
       "specType": "simple",
-      "resources": [
-        "annual",
-        "monthly"
-      ],
+      "resourceName": "monthly",
       "spec": {
-        "type": "bar",
-        "group": "Year",
+        "type": "line",
+        "group": "Date",
         "series": [
           "Mean"
         ]
