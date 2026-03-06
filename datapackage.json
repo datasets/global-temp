@@ -46,7 +46,7 @@
           {
             "description": "YYYY-MM",
             "format": "any",
-            "name": "Date",
+            "name": "Year",
             "type": "date"
           },
           {
@@ -80,7 +80,7 @@
       "resourceName": "monthly",
       "spec": {
         "type": "line",
-        "group": "Date",
+        "group": "Year",
         "series": [
           "Mean"
         ]
