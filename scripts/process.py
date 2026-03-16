@@ -158,3 +158,5 @@ def process_gistemp():
     # Step 8: Remove unnecessary files
     print('Step 8: Removing unnecessary files...')
     shutil.rmtree(tmp)
+
+process_gistemp()
