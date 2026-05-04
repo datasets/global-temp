@@ -30,7 +30,8 @@
             "type": "number"
           }
         ]
-      }
+      },
+      "description": "Annual global mean temperature anomalies in degrees Celsius from both GISTEMP (NASA) and GCAG (NOAA) sources, relative to their respective base periods (1951-1980 for GISTEMP, 20th century average for GCAG)."
     },
     {
       "format": "csv",
@@ -55,7 +56,8 @@
             "type": "number"
           }
         ]
-      }
+      },
+      "description": "Monthly global mean temperature anomalies in degrees Celsius from both GISTEMP (NASA) and GCAG (NOAA) sources, relative to their respective base periods (1951-1980 for GISTEMP, 20th century average for GCAG)."
     }
   ],
   "sources": [
