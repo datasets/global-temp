@@ -4,8 +4,8 @@ import shutil
 import requests
 
 GISTEMP_URL = 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
-GCAG_URL_monthly = 'https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.0.2.0/analysis/diagnostics/HadCRUT.5.0.2.0.analysis.summary_series.global.monthly.csv'
-GCAG_URL_annual = 'https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.0.2.0/analysis/diagnostics/HadCRUT.5.0.2.0.analysis.summary_series.global.annual.csv'
+GCAG_URL_monthly = 'https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.1.0.0/analysis/diagnostics/HadCRUT.5.1.0.0.analysis.summary_series.global.monthly.csv'
+GCAG_URL_annual = 'https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.1.0.0/analysis/diagnostics/HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv'
 
 data = 'data/'
 tmp = 'tmp/'
@@ -33,7 +33,7 @@ def merge_csv_sorted(data1, data2, filename):
         merged_data.extend(csv2_reader)
     merged_data.sort(key=lambda x: x[1])
     with open(os.path.join(data, filename), 'w', newline='') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')
         w.writerow(header)
         w.writerows(merged_data)
 
@@ -158,3 +158,7 @@ def process_gistemp():
     # Step 8: Remove unnecessary files
     print('Step 8: Removing unnecessary files...')
     shutil.rmtree(tmp)
+
+
+if __name__ == '__main__':
+    process_gistemp()
