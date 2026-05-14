@@ -1,4 +1,5 @@
 {
+  "description": "Annual and monthly global mean surface temperature anomalies in degrees Celsius, from NASA GISTEMP and UK Met Office HadCRUT5, covering 1850–present. Anomalies are relative to source-specific base periods.",
   "licenses": [
     {
       "name": "ODC-PDDL-1.0",
@@ -16,6 +17,7 @@
       "schema": {
         "fields": [
           {
+            "description": "Data provider identifier: GISTEMP (NASA Goddard Institute for Space Studies) or GCAG (UK Met Office HadCRUT5).",
             "name": "Source",
             "type": "string"
           },
@@ -41,6 +43,7 @@
       "schema": {
         "fields": [
           {
+            "description": "Data provider identifier: GISTEMP (NASA Goddard Institute for Space Studies) or GCAG (UK Met Office HadCRUT5).",
             "name": "Source",
             "type": "string"
           },
@@ -67,9 +70,9 @@
       "title": "GISTEMP Global Land-Ocean Temperature Index"
     },
     {
-      "name": "Global component of Climate at a Glance (GCAG)",
-      "path": "http://www.ncdc.noaa.gov/cag/time-series/global",
-      "title": "Global component of Climate at a Glance (GCAG)"
+      "name": "HadCRUT5 Global Temperature Dataset",
+      "path": "https://www.metoffice.gov.uk/hadobs/hadcrut5/",
+      "title": "HadCRUT5 Global Temperature Dataset (Met Office Hadley Centre)"
     }
   ],
   "title": "Global Temperature Time Series",
