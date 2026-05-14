@@ -2,9 +2,9 @@
   "description": "Annual and monthly global mean surface temperature anomalies in degrees Celsius, from NASA GISTEMP and UK Met Office HadCRUT5, covering 1850–present. Anomalies are relative to source-specific base periods.",
   "licenses": [
     {
-      "name": "ODC-PDDL-1.0",
-      "path": "http://opendatacommons.org/licenses/pddl/",
-      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+      "name": "CC-BY-4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "Creative Commons Attribution 4.0 International"
     }
   ],
   "name": "global-temp",

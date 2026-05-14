@@ -66,9 +66,15 @@ The processed data are output to `./data`.
 
 ## License
 
-### ODC-PDDL-1.0
+### CC BY 4.0
 
-This Data Package and these datasets are made available under the Public Domain Dedication and License v1.0 whose full text can be found at: http://www.opendatacommons.org/licenses/pddl/1.0/
+This Data Package is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) licence.
+
+The HadCRUT5 data is © British Crown Copyright, Met Office, provided under the [Open Government Licence v3](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/), which requires the following acknowledgement when the data are used:
+
+> HadCRUT.5.1.0.0 data were obtained from http://www.metoffice.gov.uk/hadobs/hadcrut5 and are © British Crown Copyright, Met Office, provided under an Open Government Licence, http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+
+NASA GISTEMP data is a US Government work and is in the public domain.
 
 ## References
 
