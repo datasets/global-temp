@@ -33,7 +33,7 @@ def merge_csv_sorted(data1, data2, filename):
         merged_data.extend(csv2_reader)
     merged_data.sort(key=lambda x: x[1])
     with open(os.path.join(data, filename), 'w', newline='') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')
         w.writerow(header)
         w.writerows(merged_data)
 
