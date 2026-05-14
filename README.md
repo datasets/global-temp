@@ -87,8 +87,8 @@ The upstream datasets do not impose any specific restrictions on using these dat
 * [ICOADS](http://icoads.noaa.gov/data.icoads.html)
 
 [gistemp]: http://data.giss.nasa.gov/gistemp/
-[gcag]: https://www.ncei.noaa.gov/node/6696
+[gcag]: https://www.metoffice.gov.uk/hadobs/hadcrut5/
 [hadcrut5]: https://www.metoffice.gov.uk/hadobs/hadcrut5/index.html
-[ghcn-m]: http://www.ncdc.noaa.gov/ghcnm/v3.php
+[ghcn-m]: https://www.ncei.noaa.gov/data/global-historical-climatology-network-monthly/
 [ersst]: http://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst-v3b
 [icoads]: http://icoads.noaa.gov/
